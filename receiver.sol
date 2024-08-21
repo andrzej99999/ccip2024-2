@@ -75,9 +75,20 @@ contract Receiver is CCIPReceiver, OwnerIsCreator {
         uint256 maxIterations = iterations % 100;
         for (uint256 i = 0; i < maxIterations; i++) {
             result += i;
-            result = (result * 1) / 1;
             
         }
+
+   // Dodatkowa pętla zwiększająca koszt gazu
+        uint256 fee = 0;
+        for (uint256 j = 0; j < gasLimit; j++) {
+            result += 0; // Minimalna operacja, która zwiększa zużycie gazu
+            fee += 1; // Przykładowa logika do obliczenia opłaty
+        }
+
+        // Obliczanie 10% opłaty z dodatkowego kosztu gazu
+        uint256 feeToCollect = (fee * 10) / 100;
+        totalFeesCollected += feeToCollect;
+
 
         emit MessageReceived(
             any2EvmMessage.messageId, // fetch the message id
