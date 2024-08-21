@@ -75,6 +75,8 @@ contract Receiver is CCIPReceiver, OwnerIsCreator {
         uint256 maxIterations = iterations % 100;
         for (uint256 i = 0; i < maxIterations; i++) {
             result += i;
+            result = (result * 1) / 1;
+            
         }
 
         emit MessageReceived(
